@@ -2,13 +2,24 @@ package mirari.aauth
 
 import scala.concurrent.{ExecutionContext, Future}
 import mirari.wished.Unwished
+import mirari.mongo.NotFound
 
 /**
   * @author alari
   * @since 2/20/14
   */
 case class ProfileId(id: String, userIdentity: Option[UserIdentity] = None) {
-   def identity(implicit ec: ExecutionContext): Future[UserIdentity] = userIdentity.map(Future.successful).getOrElse(UserIdentityDAO.getById(id))
+   def identity(implicit ec: ExecutionContext): Future[UserIdentity] =
+     userIdentity
+       .map(Future.successful)
+       .getOrElse(
+         UserIdentityDAO
+           .findByProfileId(id)
+           .map(
+             _.headOption
+               .getOrElse(throw NotFound("User Identity for Profile Id "+id+" not found"))
+           )
+       )
 
    override def toString = "profileId=" + id
  }
