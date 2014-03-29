@@ -20,6 +20,7 @@ private[aauth] object UserIdentityDAO extends MongoDAO.Oid[UserIdentity]("user.i
   implicit val format = Json.format[UserIdentity]
 
   ensureIndex(unique = true, dropDups = true)("identityId" -> Descending)
+  ensureIndex(unique = true, dropDups = true)("email" -> Descending, "identityId.providerId" -> Descending)
 
   /**
    * Find user by securesocial userid -- combined from id and provider
@@ -35,7 +36,7 @@ private[aauth] object UserIdentityDAO extends MongoDAO.Oid[UserIdentity]("user.i
    * @param providerId
    * @return
    */
-  override def findByEmailAndProviderId(email: String, providerId: String)(implicit ec: ExecutionContext): Future[Option[UserIdentity]] = findOne(Json.obj("email" -> email, "providerId" -> providerId))
+  override def findByEmailAndProviderId(email: String, providerId: String)(implicit ec: ExecutionContext): Future[Option[UserIdentity]] = findOne(Json.obj("email" -> email, "identityId.providerId" -> providerId))
 
   override def upsert(user: UserIdentity)(implicit ec: ExecutionContext): Future[UserIdentity] = {
     user._id match {
