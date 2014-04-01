@@ -4,6 +4,8 @@ organization := "ru.mirari"
 
 version := "1.0-SNAPSHOT"
 
+scalaVersion := "2.10.4"
+
 libraryDependencies ++= Seq(
     "ru.mirari" %% "play-wished" % "1.0-SNAPSHOT",
     "ru.mirari" %% "play-mongo" % "1.0-SNAPSHOT",
