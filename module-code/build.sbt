@@ -22,10 +22,7 @@ credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
 
 play.Project.playScalaSettings
 
-resolvers ++= Seq(
-  "quonb" at "http://mvn.quonb.org/repo/",
-  "Sonatype Snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
-)
+resolvers += "quonb" at "http://mvn.quonb.org/repo/"
 
 testOptions in Test += Tests.Argument("junitxml")
 

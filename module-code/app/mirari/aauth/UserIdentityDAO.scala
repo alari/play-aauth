@@ -36,14 +36,19 @@ private[aauth] object UserIdentityDAO extends MongoDAO.Oid[UserIdentity]("user.i
    * @param providerId
    * @return
    */
-  override def findByEmailAndProviderId(email: String, providerId: String)(implicit ec: ExecutionContext): Future[Option[UserIdentity]] = findOne(Json.obj("email" -> email, "identityId.providerId" -> providerId))
+  override def findByEmailAndProviderId(email: String, providerId: String)(implicit ec: ExecutionContext): Future[Option[UserIdentity]] = findOne(Json.obj("email" -> email.toLowerCase, "identityId.providerId" -> providerId))
 
   override def upsert(user: UserIdentity)(implicit ec: ExecutionContext): Future[UserIdentity] = {
     user._id match {
       case Some(_) =>
         update(user.toLowerCased)
       case _ =>
-        AuthPlugins.profileService.create(user.toLowerCased.copy(_id = generateSomeId)).flatMap(super.insert)
+        findByIdentityId(user.identityId).flatMap {
+          case Some(u) =>
+            update(user.toLowerCased.copy(_id = u._id))
+          case None =>
+            AuthPlugins.profileService.create(user.toLowerCased.copy(_id = generateSomeId)).flatMap(super.insert)
+        }
     }
   }
 
