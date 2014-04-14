@@ -1,4 +1,4 @@
-package mirari.aauth
+package infra.aauth
 
 import securesocial.core.providers.Token
 import play.modules.reactivemongo.json.collection.JSONCollection

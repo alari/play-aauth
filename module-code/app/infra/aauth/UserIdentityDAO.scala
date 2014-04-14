@@ -1,8 +1,8 @@
-package mirari.aauth
+package infra.aauth
 
-import mirari.mongo.MongoDAO
+import infra.mongo.MongoDAO
 import scala.concurrent.{ExecutionContext, Future}
-import play.api.libs.json.{JsObject, Json}
+import play.api.libs.json.Json
 import securesocial.core._
 import play.api.Plugin
 

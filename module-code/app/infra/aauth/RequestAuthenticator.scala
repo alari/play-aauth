@@ -1,4 +1,4 @@
-package mirari.aauth
+package infra.aauth
 
 import play.api.mvc.{SimpleResult, RequestHeader}
 import play.api.{Mode, Play, Plugin}

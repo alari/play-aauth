@@ -1,7 +1,7 @@
-package mirari.aauth
+package infra.aauth
 
 import scala.concurrent.Await
-import mirari.mongo.MongoDomain
+import infra.mongo.MongoDomain
 import securesocial.core._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 

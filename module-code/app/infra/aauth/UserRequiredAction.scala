@@ -1,9 +1,9 @@
-package mirari.aauth
+package infra.aauth
 
 import play.api.mvc._
 import scala.concurrent.Future
 import play.api.mvc.SimpleResult
-import mirari.wished.Unwished
+import infra.wished.Unwished
 
 
 object UserRequiredAction extends ActionBuilder[UserRequiredRequest] {
@@ -17,5 +17,5 @@ object UserRequiredAction extends ActionBuilder[UserRequiredRequest] {
          case (None, f) =>
            Future successful f(AuthPlugins.unauthorizedResponse(request))
        }
-     }
+     }(request)
  }

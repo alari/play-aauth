@@ -1,7 +1,7 @@
-package mirari.aauth
+package infra.aauth
 
 import securesocial.core.{IdentityId, Authenticator}
-import mirari.mongo.{MongoDAO, MongoDomain}
+import infra.mongo.{MongoDAO, MongoDomain}
 import play.api.libs.json.Json
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 

@@ -1,8 +1,8 @@
-package mirari.aauth
+package infra.aauth
 
 import play.api.mvc.{SimpleResult, Request, ActionBuilder}
 import scala.concurrent.Future
-import mirari.wished.Unwished
+import infra.wished.Unwished
 
 /**
  * @author alari
@@ -15,5 +15,5 @@ object UserAwareAction extends ActionBuilder[UserAwareRequest] {
     Unwished.wrap {
       val (pid, f) = AuthPlugins.requestAuthenticator.getFromRequest(request)
       block(UserAwareRequest(pid, request)).map(f)
-    }
+    }(request)
 }

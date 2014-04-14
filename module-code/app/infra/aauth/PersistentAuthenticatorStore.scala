@@ -1,4 +1,4 @@
-package mirari.aauth
+package infra.aauth
 
 import securesocial.core.{Authenticator, AuthenticatorStore}
 import scala.concurrent.Await

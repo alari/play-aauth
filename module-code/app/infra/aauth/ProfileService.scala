@@ -1,4 +1,4 @@
-package mirari.aauth
+package infra.aauth
 
 import scala.concurrent.{ExecutionContext, Future}
 import play.api.Plugin

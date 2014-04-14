@@ -1,30 +1,31 @@
 name := "play-aauth"
 
-organization := "ru.mirari"
+organization := "play-infra"
 
-version := "1.0-SNAPSHOT"
+version := "0.1"
 
 scalaVersion := "2.10.4"
 
 libraryDependencies ++= Seq(
-    "ru.mirari" %% "play-wished" % "1.0-SNAPSHOT",
-    "ru.mirari" %% "play-mongo" % "1.0-SNAPSHOT",
+    "play-infra" %% "play-wished" % "0.1",
+    "play-infra" %% "play-mongo" % "0.1",
     "ws.securesocial" %% "securesocial" % "2.1.3"
 )
 
-publishTo := {
-  val artifactory = "http://mvn.quonb.org/artifactory/"
-  if (version.value.trim.endsWith("SNAPSHOT"))
-    Some("Artifactory Realm" at artifactory + "plugins-snapshot-local/")
-  else
-    Some("Artifactory Realm" at artifactory + "plugins-release-local/")
-}
-
-credentials += Credentials(Path.userHome / ".ivy2" / ".credentials")
-
 play.Project.playScalaSettings
 
-resolvers += "quonb" at "http://mvn.quonb.org/repo/"
+resolvers += "quonb" at "http://repo.quonb.org/"
+
+scalacOptions ++= Seq(
+  "-unchecked",
+  "-deprecation",
+  "-Ywarn-dead-code",
+  "-language:_",
+  "-target:jvm-1.7",
+  "-encoding", "UTF-8"
+)
+
+publishTo := Some(Resolver.file("file",  new File( "/mvn-repo" )) )
 
 testOptions in Test += Tests.Argument("junitxml")
 

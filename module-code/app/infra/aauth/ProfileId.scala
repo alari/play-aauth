@@ -1,8 +1,8 @@
-package mirari.aauth
+package infra.aauth
 
 import scala.concurrent.{ExecutionContext, Future}
-import mirari.wished.Unwished
-import mirari.mongo.NotFound
+import infra.wished.Unwished
+import infra.mongo.NotFound
 
 /**
   * @author alari
